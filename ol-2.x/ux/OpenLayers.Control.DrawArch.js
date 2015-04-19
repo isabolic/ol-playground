@@ -1,6 +1,6 @@
-OpenLayers.Control.Draw.Arch = OpenLayers.Class(OpenLayers.Control, {
+OpenLayers.Control.DrawArch = OpenLayers.Class(OpenLayers.Control, {
 
-    CLASS_NAME: "OpenLayers.Control.Draw.Arch",
+    CLASS_NAME: "OpenLayers.Control.DrawArch",
     EVENT_TYPES: ["activate", "deactivate", "featureadded"],
     handler: null,
     centerPoint: null,
@@ -94,6 +94,7 @@ OpenLayers.Control.Draw.Arch = OpenLayers.Class(OpenLayers.Control, {
         this.handler = new handler(this, this.callbacks, this.handlerOptions);
 
     },
+
     dragStart: function(feature, pixel) {
         if (feature.geometry.equals(this.centerPoint)) {
             this.dragControl.deactivate();
@@ -101,9 +102,10 @@ OpenLayers.Control.Draw.Arch = OpenLayers.Class(OpenLayers.Control, {
             return;
         }
 
-        (this.centerfeat) ? this.layer.destroyFeatures([this.centerfeat], {
-            silent: true
-        });
+        if (this.centerfeat)
+            this.layer.destroyFeatures([this.centerfeat], {
+                silent: true
+            });
     },
 
     dragVertex: function(vertex, pixel) {
