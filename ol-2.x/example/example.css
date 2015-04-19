@@ -1,0 +1,25 @@
+#controls {
+    position: absolute;
+    right: 20px;
+    z-index: 999 !important;
+    background-color: rgba(43, 43, 188, 0.72);
+    bottom: 50px;
+    width: 300px;
+    height: 200px;
+    border-top-left-radius: 10px;
+}
+#map {
+    width: 98%;
+    height: 98%;
+    position: absolute;
+}
+.controls-container {
+    list-style-type: none;
+}
+.controls-container > li{
+    color:white;
+}
+.controls-container > li > input[type="radio"]{
+    margin-left: 5px;
+    margin-right: 5px;
+}

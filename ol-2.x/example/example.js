@@ -21,12 +21,54 @@ var setup = function() {
     map.addControl(new OpenLayers.Control.LayerSwitcher());
     map.zoomToMaxExtent();
 
-    window.archControl = new OpenLayers.Control.DrawArch(vector, OpenLayers.Handler.Arch, {
-        drawCenter: true,
-        typeCircle: 'line',
-        geomType: 'Line,Path,Collection'
-    });
-    map.addControl(window.archControl);
+    window.controls = getControls(vector);
 
-    window.archControl.activate();
+    for (var key in window.controls) {
+        map.addControl(window.controls[key]);
+        addControlElement(window.controls[key]);
+    }
+};
+
+var getControls = function(vectorLayer) {
+    return {
+        drawArch: new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
+            drawCenter: true,
+            typeCircle: 'line',
+            geomType: 'Line,Path,Collection',
+            active:true
+        }),
+        archEditControl: new OpenLayers.Control.EditArch(vectorLayer, {
+            geomType: 'Line,Path,Collection'
+        })
+    };
+};
+
+
+var addControlElement = function(control) {
+    var li = document.createElement("li"),
+        checkbox = document.createElement("input"),
+        _control = control;
+
+    checkbox.setAttribute("type", "radio");
+    checkbox.setAttribute("name", "control");
+
+    if(_control.active){
+        checkbox.setAttribute("checked", "true");
+        _control.activate();
+    }
+
+    li.addEventListener('click', function() {
+        for (var key in window.controls) {
+            window.controls[key].deactivate();
+        }
+
+        _control.activate();
+    });
+
+
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(control.CLASS_NAME));
+    document.getElementsByClassName("controls-container")[0]
+        .appendChild(li);
+
 };

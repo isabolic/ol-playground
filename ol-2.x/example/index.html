@@ -10,10 +10,15 @@
         <link rel="stylesheet" href="../OpenLayers-2.11/theme/default/style.css" type="text/css">
         <script src="../ux/OpenLayers.Handler.Arch.js"></script>
         <script src="../ux/OpenLayers.Control.DrawArch.js"></script>
+        <script src="../ux/OpenLayers.Control.EditArch.js"></script>
         <script src="example.js"></script>
+        <link rel="stylesheet" href="example.css" type="text/css">
     </head>
     <body onload="setup()">
-        <div id="map" style="width:98%;height:98%; position:absolute;"></div>
-
+        <div id="map"></div>
+        <div id="controls">
+            <ul class="controls-container">
+            </ul>
+        </div>
     </body>
 </html>
