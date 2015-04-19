@@ -1,4 +1,4 @@
-OpenLayers playgroud
+OpenLayers playground
 
 OpenLayers example of custom control to draw arch for now, I plan to migrate to OL3 and develop in new feature other controls.
 example is here so you can see :
