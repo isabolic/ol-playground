@@ -35,11 +35,15 @@ var getControls = function(vectorLayer) {
             drawCenter: true,
             typeCircle: 'line',
             geomType: 'Line,Path,Collection',
-            active:true
+            active: true
         }),
         archEditControl: new OpenLayers.Control.EditArch(vectorLayer, {
             geomType: 'Line,Path,Collection'
-        })
+        }),
+        ScaleFeature: new OpenLayers.Control.ScaleFeature(vectorLayer),
+        DrawPolygon: new OpenLayers.Control.DrawFeature(vectorLayer,
+            OpenLayers.Handler.Polygon),
+        intersection:new OpenLayers.Control.Intersect({vector:vectorLayer})
     };
 };
 
@@ -52,7 +56,7 @@ var addControlElement = function(control) {
     checkbox.setAttribute("type", "radio");
     checkbox.setAttribute("name", "control");
 
-    if(_control.active){
+    if (_control.active) {
         checkbox.setAttribute("checked", "true");
         _control.activate();
     }
