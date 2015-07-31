@@ -25,30 +25,39 @@ var setup = function() {
 
     for (var key in window.controls) {
         map.addControl(window.controls[key]);
-        addControlElement(window.controls[key]);
+        addControlElement(window.controls[key],key);
+
+        if(key === "drawLinePerpendicular"){
+            window.controls[key].handler.setPerpendicular(true);
+        }else if (key === "drawLineOrtho"){
+            window.controls[key].handler.setOrtho(true);
+        }
     }
 };
 
 var getControls = function(vectorLayer) {
     return {
-        drawArch: new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
-            drawCenter: true,
-            typeCircle: 'line',
-            geomType: 'Line,Path,Collection',
-            active: true
-        }),
-        archEditControl: new OpenLayers.Control.EditArch(vectorLayer, {
-            geomType: 'Line,Path,Collection'
-        }),
-        ScaleFeature: new OpenLayers.Control.ScaleFeature(vectorLayer),
-        DrawPolygon: new OpenLayers.Control.DrawFeature(vectorLayer,
-            OpenLayers.Handler.Polygon),
-        intersection:new OpenLayers.Control.Intersect({vector:vectorLayer})
+        drawArch                :   new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
+                                        drawCenter : true,
+                                        typeCircle : 'line',
+                                        geomType   : 'Line,Path,Collection',
+                                        active     : true
+                                }),
+        archEditControl         :   new OpenLayers.Control.EditArch(vectorLayer, {
+                                        geomType: 'Line,Path,Collection'
+                                }),
+        scaleFeature            :   new OpenLayers.Control.ScaleFeature(vectorLayer),
+        drawPolygon             :   new OpenLayers.Control.DrawFeature(vectorLayer,
+                                        OpenLayers.Handler.Polygon),
+        intersection            :   new OpenLayers.Control.Intersect({vector:vectorLayer}),
+        rotateFeature           :   new OpenLayers.Control.RotateFeature(vectorLayer),
+        drawLinePerpendicular   :   new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path),
+        drawLineOrtho           :   new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path),
     };
 };
 
 
-var addControlElement = function(control) {
+var addControlElement = function(control, label) {
     var li = document.createElement("li"),
         checkbox = document.createElement("input"),
         _control = control;
@@ -71,7 +80,7 @@ var addControlElement = function(control) {
 
 
     li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(control.CLASS_NAME));
+    li.appendChild(document.createTextNode(label || control.CLASS_NAME));
     document.getElementsByClassName("controls-container")[0]
         .appendChild(li);
 
