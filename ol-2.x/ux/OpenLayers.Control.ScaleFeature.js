@@ -1,15 +1,15 @@
 OpenLayers.Control.ScaleFeature = OpenLayers.Class(OpenLayers.Control, {
-    layer: null,
-    feature: null,
-    selectControl: null,
-    drawControl: null,
-    modified: false,
-    reference: false,
+    layer:            null,
+    feature:          null,
+    selectControl:    null,
+    drawControl:      null,
+    modified:         false,
+    reference:        false,
     scaleDenominator: 1,
-    refOrigin: null,
-    EVENT_TYPES: ["feature_selected", "activate", "deactivate"],
-    CLASS_NAME: "OpenLayers.Control.ScaleFeature",
-    initialize: function(layer, options) {
+    refOrigin:        null,
+    EVENT_TYPES:      ["feature_selected", "activate", "deactivate"],
+    CLASS_NAME:       "OpenLayers.Control.ScaleFeature",
+    initialize:       function(layer, options) {
         this.layer = layer;
         OpenLayers.Control.prototype.initialize.apply(this, [options]);
 
@@ -68,7 +68,7 @@ OpenLayers.Control.ScaleFeature = OpenLayers.Class(OpenLayers.Control, {
             this.layer.events.un({
                 "sketchcomplete": this.onSketchComplete,
                 "sketchmodified": this.onSketchModified,
-                scope: this
+                scope:            this
             });
 
             this.selectControl.deactivate();
@@ -96,20 +96,20 @@ OpenLayers.Control.ScaleFeature = OpenLayers.Class(OpenLayers.Control, {
         this.modified = false;
         if (this.events.triggerEvent("feature_selected", {
                 feature: feature
-            }) == false) {
+            }) === false) {
             return;
-        };
+        }
 
         this.layer.events.on({
             "sketchcomplete": this.onSketchComplete,
             "sketchmodified": this.onSketchModified,
-            scope: this
+            scope:            this
         });
         this.selectControl.deactivate();
         this.drawControl.activate();
 
         this.scaleDenominator = 1;
-        this.refOrigin = null;
+        this.refOrigin        = null;
 
         // keep track of geometry modifications
         var modified = feature.modified;
@@ -136,6 +136,7 @@ OpenLayers.Control.ScaleFeature = OpenLayers.Class(OpenLayers.Control, {
             this.layer.eraseFeatures([this.feature], {
                 silent: true
             });
+
             this.feature.geometry = this._originalGeometry.clone();
 
             var geometry = this.feature.geometry;
@@ -145,7 +146,7 @@ OpenLayers.Control.ScaleFeature = OpenLayers.Class(OpenLayers.Control, {
 
             this._originX = origin.x;
             this._originY = origin.y;
-            this._scale = scale;
+            this._scale   = scale;
 
             this.layer.drawFeature(this.feature, this.selectControl.renderIntent);
             this.feature._sketch = true;
