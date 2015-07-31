@@ -1,15 +1,15 @@
-OpenLayers.Util.distanceBetween2Coordinates = function(X1, Y1, X2, Y2) {
-    //return na 5 decimals
-    var distance = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+OpenLayers.Util.distanceBetween2Coordinates = function(x1, y1, x2, y2) {
+    //return on 5 decimals
+    var distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     return Math.round(distance * Math.pow(10, 5)) / Math.pow(10, 5);
 };
 
-OpenLayers.Util.wayAngle = function(X1, Y1, X2, Y2) {
+OpenLayers.Util.wayAngle = function(x1, y1, x2, y2) {
     var angle;
-    if (Math.abs(X1 - X2) < 0.000001 && Math.abs(Y1 - Y2 < 0.000001)) {
+    if (Math.abs(x1 - x2) < 0.000001 && Math.abs(y1 - y2 < 0.000001)) {
         angle = 0;
     } else {
-        angle = Math.atan2(Y2 - Y1, X2 - X1);
+        angle = Math.atan2(y2 - y1, x2 - x1);
         angle = Math.PI / 2 - angle;
         if (angle < 0) {
             angle = angle + 2 * Math.PI;
@@ -46,7 +46,7 @@ OpenLayers.Util.arc = function(originX, originY, radius, angleBeginRad, angleEnd
     var sides = Math.ceil(Math.sqrt(radius) * 4);
     sides = (sides < 40) ? 40 : sides;
     sides = (sides > 150) ? 150 : sides;
-    sides = Math.ceil((angleEndRad - angleBeginRad) * sides / (2 * Math.PI)); //za lukove
+    sides = Math.ceil((angleEndRad - angleBeginRad) * sides / (2 * Math.PI));
     sides = (sides < 4) ? 4 : sides;
 
     var otklon = (angleEndRad - angleBeginRad) / (sides);
