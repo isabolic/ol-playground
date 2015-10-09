@@ -13,6 +13,6 @@ I plan to migrate to OL3 and develop in new feature other controls.
 Also the documentation will be written in the new future.
 example is here so you can see:
 
-https://rawgit.com/isabolic/ol-playground/master/ol-2.x/example/index.html
+http://isabolic.github.io/ol-playground/
 
 stay tune :)
