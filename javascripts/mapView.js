@@ -1,29 +1,29 @@
-(function ($) {
+(function($) {
     var defaultOptions = {
         container: null
     };
 
-    var addCutomControl = function (vectorLayer) {
-        var customControls = {
-                 drawArch: new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
-                     drawCenter: true,
-                     typeCircle: 'line',
-                     geomType: 'Line,Path,Collection',
-                     active: true
-                 }),
-                 archEditControl: new OpenLayers.Control.EditArch(vectorLayer, {
-                     geomType: 'Line,Path,Collection'
-                 }),
-                 scaleFeature: new OpenLayers.Control.ScaleFeature(vectorLayer),
-                 drawPolygon: new OpenLayers.Control.DrawFeature(vectorLayer,
-                     OpenLayers.Handler.Polygon),
-                 intersection: new OpenLayers.Control.Intersect({
-                     vector: vectorLayer
-                 }),
-                 rotateFeature: new OpenLayers.Control.RotateFeature(vectorLayer),
-                 drawLinePerpendicular: new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path),
-                 drawLineOrtho: new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path)
-              };
+    var addCutomControl = function(vectorLayer) {
+        this.customControls = {
+            drawArch   : new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
+                    drawCenter : true,
+                    typeCircle : 'line',
+                    geomType   : 'Line,Path,Collection',
+                    active     : true
+            }),
+            archEditControl       : new OpenLayers.Control.EditArch(vectorLayer, { geomType : 'Line,Path,Collection'}),
+            scaleFeature          : new OpenLayers.Control.ScaleFeature(vectorLayer),
+            drawPolygon           : new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Polygon),
+            intersection          : new OpenLayers.Control.Intersect({ vector: vectorLayer}),
+            rotateFeature         : new OpenLayers.Control.RotateFeature(vectorLayer),
+            drawLinePerpendicular : new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path),
+            drawLineOrtho         : new OpenLayers.Control.DrawFeature(vectorLayer, OpenLayers.Handler.Path)
+        };
+
+        $.map(this.customControls, $.proxy(function(control){
+            this.ol.map.addControl(control);
+            control.deactivate();
+        }, this));
     };
 
 
@@ -32,6 +32,7 @@
         this.dom = {
             $mapContainer: null
         };
+        this.customControls  = null;
         this.ol = {
             map: null,
             layers: [],
@@ -53,11 +54,11 @@
                 "id": "ex-map"
             });
 
-            $.map(this.dom, $.proxy(function ($e) {
+            $.map(this.dom, $.proxy(function($e) {
                 this.$container.append($e);
             }, this));
             $(document)
-                .ready($.proxy(function () {
+                .ready($.proxy(function() {
                     this.ol.map = new OpenLayers.Map("ex-map", {
                         controls: []
                     });
@@ -65,10 +66,10 @@
                     //this.ol.layers.push(new OpenLayers.Layer.OSM( "Simple OSM Map")) ;
                     this.ol.layers.push(
                         new OpenLayers.Layer.XYZ("My Map Layer", [
-                          "http://a.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
-                          "http://b.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
-                          "http://c.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
-                          "http://d.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w"
+                            "http://a.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
+                            "http://b.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
+                            "http://c.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
+                            "http://d.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w"
                         ], {
                             sphericalMercator: true,
                             wrapDateLine: true
@@ -90,9 +91,8 @@
                             this.ol.initExtent.top);
 
                     this.ol.map.zoomToExtent(this.ol.initExtent);
+                    addCutomControl.apply(this, [this.ol.layers[1]]);
                 }, this));
-
-                //addCutomControl.apply(this [this.ol.layers[0]]);
         };
 
         return this.init(options);
