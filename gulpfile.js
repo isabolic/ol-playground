@@ -13,14 +13,27 @@ gulp.task('minify',function () {
 });
 
 gulp.task('concat', ["minify"],  function () {
-    return gulp.src('dist/tmp/*.js') // path to your files
+    return gulp.src('dist/tmp/*.js')
     .pipe(concat('compiled.js'))
     .pipe(gulp.dest('dist/'));
 });
+
+gulp.task('concat-tidy', function () {
+    return gulp.src(['ol-2.x/OpenLayers-2.11/OpenLayers-tidy.js',"ol-2.x/ux/*.js"])
+    .pipe(concat('compiled-tidy.js'))
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('concat-only-extend', function () {
+    return gulp.src(["ol-2.x/ux/*.js"])
+    .pipe(concat('compiled-extendOnly-tidy.js'))
+    .pipe(gulp.dest('dist/'));
+});
+
 
 gulp.task('cleanUp', ["concat"], function () {
     return gulp.src('dist/tmp', {read: false})
         .pipe(clean());
 });
 
-gulp.task('default', ['cleanUp']);
+gulp.task('default', ['cleanUp', 'concat-tidy', 'concat-only-extend']);
