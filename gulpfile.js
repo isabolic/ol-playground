@@ -1,13 +1,13 @@
 // including plugins
-var gulp = require('gulp')
-, concat = require("gulp-concat")
-, uglify = require("gulp-uglify")
-, clean  = require('gulp-clean');
+var gulp = require('gulp'),
+  concat = require("gulp-concat"),
+  uglify = require("gulp-uglify"),
+  clean  = require('gulp-clean');
 
 
 // task
 gulp.task('minify',function () {
-    return gulp.src(['ol-2.x/OpenLayers-2.11/*.js',"ol-2.x/ux/*.js"]) // path to your files
+    return gulp.src(['ol-2.x/OpenLayers-2.11/OpenLayers-tidy.js',"ol-2.x/ux/*.js"]) // path to your files
     .pipe(uglify())
     .pipe(gulp.dest('dist/tmp'));
 });
