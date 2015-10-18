@@ -7,3 +7,6 @@
 [submodule "libs/jquery"]
 	path = libs/jquery
 	url = https://github.com/jquery/jquery.git
+[submodule "libs/ol-playground"]
+	path = libs/ol-playground
+	url = https://github.com/isabolic/ol-playground.git
