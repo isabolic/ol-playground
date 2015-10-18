@@ -23,7 +23,7 @@
                           "href"  : "#"})
                     .append(
                       $("<i>", {
-                          "class": "fa fa-4x fa-fw fa-bars"
+                          "class": "fa fa-3x fa-fw fa-bars"
                         })
                     );
 
@@ -34,7 +34,7 @@
                               "href"  : this.options.tarLinkDwn})
                         .append(
                           $("<i>", {
-                              "class": "fa fa-4x fa-fw fa-file-archive-o",
+                              "class": "fa fa-3x fa-fw fa-file-archive-o",
                               "title": "TAR archive download",
                               "data-toggle":"tooltip"
                             })
@@ -48,7 +48,7 @@
                                "href" : this.options.zipLinkDwn})
                         .append(
                           $("<i>", {
-                              "class": "fa fa-4x  fa-fw fa-file-archive-o",
+                              "class": "fa fa-3x  fa-fw fa-file-archive-o",
                               "title": "ZIP archive download",
                               "data-toggle":"tooltip"
                             })

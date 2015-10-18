@@ -35,7 +35,7 @@
                       "href"  : "#"})
                     .append(
                       $("<i>", {
-                        "class": "fa fa-4x fa-fw fa-map",
+                        "class": "fa fa-3x fa-fw fa-map",
                         "title": "map example",
                         "data-toggle":"tooltip"
                       })
@@ -46,7 +46,7 @@
                         "href"  : "#"})
                   .append(
                       $("<i>", {
-                        "class": "fa fa-4x fa-fw fa-tasks",
+                        "class": "fa fa-3x fa-fw fa-tasks",
                         "title": "docs :)",
                         "data-toggle":"tooltip"
                       })

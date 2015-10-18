@@ -66,3 +66,10 @@ body .tooltip.right .tooltip-arrow{
         width: 100%;
     }
 }
+.map.olMap{
+  height: 100%;
+}
+.container-content{
+  padding: 0px;
+  background-color: white;
+}
