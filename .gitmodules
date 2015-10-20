@@ -10,3 +10,6 @@
 [submodule "libs/ol-playground"]
 	path = libs/ol-playground
 	url = https://github.com/isabolic/ol-playground.git
+[submodule "libs/awesome-bootstrap-checkbox"]
+	path = libs/awesome-bootstrap-checkbox
+	url = https://github.com/isabolic/awesome-bootstrap-checkbox.git
