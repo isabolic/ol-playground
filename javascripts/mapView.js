@@ -1,9 +1,53 @@
 (function($) {
-    var defaultOptions = {
-        container: null
-    };
+    var
 
-    var addCutomControl = function(vectorLayer) {
+    defaultOptions = {
+        container: null
+    },
+
+    addCustomControlMenu = function (){
+        this.dom.$controlContainer
+            .append(
+                $("<div>", {
+                    "class": "toggle-control-menu"
+                })
+                .append($("<i>", {
+                    "class": "fa fa-2x fa-fw fa-chevron-right"
+                }))
+            );
+
+        this.dom.$controlContainer
+            .append($("<ul>", {"class":"controls-list fa-ul"}));
+
+        $.map(this.customControls, $.proxy(function(control, name){
+            var li = $("<li>").append(
+                $("<div>",{"class": "radio radio-info", "control-name": name})
+                    .append([
+                        $("<input>",{"type":"radio", "name": "control"}),
+                        $("<label>",{"for": name, "text":name})
+                    ])
+            );
+            this.dom.$controlContainer
+                .find(".controls-list")
+                .append(li);
+
+        }, this));
+
+        this.dom.$controlContainer.on("click", ".radio.radio-info", $.proxy(function(e){
+            var radio = $(e.currentTarget)
+
+            $.map(this.customControls, $.proxy(function(control, name){
+                this.ol.map.addControl(control);
+                if(name === radio.attr("control-name")){
+                    control.activate();
+                }else{
+                    control.deactivate();
+                }
+            }, this));
+        }, this));
+    },
+
+    addCustomControl = function(vectorLayer) {
         this.customControls = {
             drawArch   : new OpenLayers.Control.DrawArch(vectorLayer, OpenLayers.Handler.Arch, {
                     drawCenter : true,
@@ -30,7 +74,8 @@
     ns.mapView = function menu(options) {
         this.$container = null;
         this.dom = {
-            $mapContainer: null
+            $mapContainer: null,
+            $controlContainer: null
         };
         this.customControls  = null;
         this.ol = {
@@ -52,6 +97,10 @@
             this.dom.$mapContainer = $("<div>", {
                 "class": "map",
                 "id": "ex-map"
+            });
+
+            this.dom.$controlContainer = $("<div>", {
+                "class": "map-control"
             });
 
             $.map(this.dom, $.proxy(function($e) {
@@ -91,7 +140,9 @@
                             this.ol.initExtent.top);
 
                     this.ol.map.zoomToExtent(this.ol.initExtent);
-                    addCutomControl.apply(this, [this.ol.layers[1]]);
+                    addCustomControl.apply(this, [this.ol.layers[1]]);
+                    addCustomControlMenu.apply(this);
+
                 }, this));
         };
 

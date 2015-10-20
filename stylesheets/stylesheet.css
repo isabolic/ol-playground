@@ -1,75 +1,93 @@
-html, body{
+html, body {
     height: 100%;
     margin: 0px;
 }
-body{
+body {
     background-color: #0288D1;
 }
-
-body .fa, body span{
-    color:white;
+body .fa, body span {
+    color: white;
 }
-
-body .tooltip-inner{
+body .tooltip-inner {
     background-color: rgba(0, 0, 0, 0.66);
-    color:white;
+    color: white;
 }
-body .tooltip.bottom .tooltip-arrow,
-body .tooltip.top .tooltip-arrow,
-body .tooltip.left .tooltip-arrow,
-body .tooltip.right .tooltip-arrow{
+body .tooltip.bottom .tooltip-arrow, body .tooltip.top .tooltip-arrow, body .tooltip.left .tooltip-arrow, body .tooltip.right .tooltip-arrow {
     border-bottom-color: rgba(0, 0, 0, 0.66);
 }
-.nav-bar{
+.nav-bar {
     padding: 10px 20px;
     background-color: #1D70CA;
     border-bottom: 2px solid white;
 }
-.menu, .container-content{
+.menu, .container-content {
     height: 100%;
 }
-
-.menu{
+.menu {
     border-right: 2px solid white;
 }
-.menu-container .menu-el{
+.menu-container .menu-el {
     display: block;
     margin-bottom: 10px;
 }
-.menu-container .menu-el.active{
+.menu-container .menu-el.active {
     background-color: white;
     margin-left: -15px;
     margin-right: -15px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.menu-container .menu-el.active:first-child{
+.menu-container .menu-el.active:first-child {
     margin-top: -10px;
 }
-
-.menu-container .menu-el.active .fa{
+.menu-container .menu-el.active .fa {
     color: #337ab7;
 }
-.menu-container{
+.menu-container {
     padding-top: 10px;
     text-align: center;
     padding-bottom: 10px;
 }
-.menu-link{
+.menu-link {
     display: block;
     float: left;
 }
-
-@media (max-width: 768px){
-    .navigation-bar-cnt{
+@media (max-width: 768px) {
+    .navigation-bar-cnt {
         float: left;
         width: 100%;
     }
 }
-.map.olMap{
-  height: 100%;
+.map.olMap {
+    height: 100%;
 }
-.container-content{
-  padding: 0px;
-  background-color: white;
+.container-content {
+    padding: 0px;
+    background-color: white;
+}
+.menu-link {
+    margin-left: 8px;
+}
+.map-control {
+    background-color: rgba(51, 122, 183, 0.82);
+    width: 200px;
+    position: absolute;
+    top: 2em;
+    right: 0px;
+    z-index: 99000;
+    border: 1px solid transparent;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.toggle-control-menu{
+    padding: 5px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid white;
+}
+.controls-list{
+    margin-left: 12px;
+}
+.controls-list .radio label {
+    color: white;
+    font-weight: bold;
 }
