@@ -34,7 +34,7 @@
         }, this));
 
         this.dom.$controlContainer.on("click", ".radio.radio-info", $.proxy(function(e){
-            var radio = $(e.currentTarget)
+            var radio = $(e.currentTarget);
 
             $.map(this.customControls, $.proxy(function(control, name){
                 this.ol.map.addControl(control);
@@ -42,6 +42,12 @@
                     control.activate();
                 }else{
                     control.deactivate();
+                }
+
+                if(name === "drawLinePerpendicular"){
+                    control.handler.setPerpendicular(true);
+                }else if (name === "drawLineOrtho"){
+                    control.handler.setOrtho(true);
                 }
             }, this));
         }, this));
@@ -82,10 +88,10 @@
             map: null,
             layers: [],
             initExtent: {
-                bottom: 2783530.8216455,
-                left: -5135039.5594831,
-                right: 7114452.8436809,
-                top: 8546271.2573193
+                bottom: -62.5341796875,
+                left: -44.524841308594,
+                right: 65.514221191406,
+                top: -10.7666015625
             },
             customControls: [],
         };
@@ -112,7 +118,6 @@
                         controls: []
                     });
 
-                    //this.ol.layers.push(new OpenLayers.Layer.OSM( "Simple OSM Map")) ;
                     this.ol.layers.push(
                         new OpenLayers.Layer.XYZ("My Map Layer", [
                             "http://a.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
@@ -120,9 +125,10 @@
                             "http://c.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w",
                             "http://d.tiles.mapbox.com/v4/isabolic.k7bc0ljd/${z}/${x}/${y}.png?access_token=pk.eyJ1IjoiaXNhYm9saWMiLCJhIjoiZHFabzRmdyJ9.xih7hNxtMP9ESu5FTq5y3w"
                         ], {
-                            sphericalMercator: true,
+                            sphericalMercator: false,
                             wrapDateLine: true
-                        }));
+                        })
+                    );
 
                     this.ol.layers.push(new OpenLayers.Layer.Vector("layer", {
                         LayerName: 'layer',
