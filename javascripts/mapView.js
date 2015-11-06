@@ -12,12 +12,42 @@
                     "class": "toggle-control-menu"
                 })
                 .append($("<i>", {
-                    "class": "fa fa-2x fa-fw fa-chevron-right"
+                    "class": "fa fa-2x fa-fw toggle-menu fa-chevron-right"
                 }))
             );
 
         this.dom.$controlContainer
-            .append($("<ul>", {"class":"controls-list fa-ul"}));
+            .append(
+                $("<div>", {
+                    "class": "controls-list-wrapper"
+                }).append(
+                    $("<ul>", {"class":"controls-list fa-ul"})
+                )
+            );
+
+        this.dom.$controlContainer.on("click", ".toggle-menu", $.proxy(function(e){
+            var $menu =
+                    this.dom.$controlContainer
+                            .find(".toggle-control-menu"),
+                $mapContrl =
+                    this.dom.$controlContainer,
+                $ctlListWrapper =
+                    this.dom.$controlContainer
+                            .find(".controls-list-wrapper"),
+                CtlrWidth = $menu.outerWidth(true) + 1;
+
+            if($ctlListWrapper.hasClass("hidden")){
+                CtlrWidth = 300;
+            }
+            // debugger;
+            $mapContrl.animate({
+                width: CtlrWidth
+            },{complete: function () {
+                    $ctlListWrapper.toggleClass("hidden");
+                }
+            });
+        },this));
+
 
         $.map(this.customControls, $.proxy(function(control, name){
             var li = $("<li>").append(

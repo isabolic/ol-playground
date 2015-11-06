@@ -9,10 +9,10 @@
                     "class": "row"
                 })
                 .append($("<div>", {
-                    "class": "menu col-md-1 col-sm-2"
+                    "class": "menu col-md-1 col-sm-2 col-xs-2"
                 }))
                 .append($("<div>", {
-                    "class": "container-content col-sm-11"
+                    "class": "container-content col-md-11 col-sm-10 col-xs-10"
                 })),
             $navBar: $("<div>", {
                     "class": "row navigation-bar"
